@@ -21,18 +21,20 @@ def create_df():
     return df
 
 # get list of all files in a directory and sub directorys, add result to df
-def get_file_list(dir_to_search):
+def get_file_list(dir_to_search, file_extension):
     df = create_df()
     for root, dirs, files in os.walk(dir_to_search):
         for file in files:
             path_ = f'{root}\{file}'
             time_ = os.path.getctime(path_)
-            df = pd.concat([df, pd.DataFrame.from_records([{ 'path': os.path.join(root, file), 'file_name': file, 'formated_time': time.ctime(time_), 'last_modified_time': time_ }])])
+
+            if file.endswith(file_extension):
+                df = pd.concat([df, pd.DataFrame.from_records([{ 'path': os.path.join(root, file), 'file_name': file, 'formated_time': time.ctime(time_), 'last_modified_time': time_ }])])
+                print(file)
     return df
 
 # filter df by file name extension and sort by last modified time in descending order
-def filter_df(df, file_extension):
-    df = df[df['file_name'].str.endswith(file_extension)]
+def sort_df(df):
     df = df.sort_values(by='last_modified_time', ascending=False)
     return df
 
@@ -53,9 +55,17 @@ def get_path(df):
 
 df = create_df()
 
-df = get_file_list(Directory_to_Search)
+print("Created DF...")
 
-df = filter_df(df, Filetype_to_Open)
+df = get_file_list(Directory_to_Search, Filetype_to_Open)
+
+print("File list parsed...")
+
+df = sort_df(df)
+
+print("DF Filtered...")
+
+print(df)
 
 path_mr = get_path(df)
 
