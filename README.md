@@ -48,3 +48,6 @@ The script includes several functions to handle the search and processing steps:
 - `sort_df(df)`: Sorts the DataFrame based on the last modified time.
 - `open_path(path)`: Tries to open the file at the specified path.
 - `get_path(df)`: Retrieves the path of the most recently modified file from the DataFrame.
+
+
+* readme.md genenerated with GPT
