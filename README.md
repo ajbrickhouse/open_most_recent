@@ -49,5 +49,4 @@ The script includes several functions to handle the search and processing steps:
 - `open_path(path)`: Tries to open the file at the specified path.
 - `get_path(df)`: Retrieves the path of the most recently modified file from the DataFrame.
 
-
-* readme.md genenerated with GPT
+_readme.md genenerated with GPT_
